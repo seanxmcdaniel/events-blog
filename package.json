@@ -8,5 +8,22 @@
     "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.2"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "events-blog",
+  "description": "Repository for Project 2",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanxmcdaniel/events-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanxmcdaniel/events-blog/issues"
+  },
+  "homepage": "https://github.com/seanxmcdaniel/events-blog#readme"
 }
