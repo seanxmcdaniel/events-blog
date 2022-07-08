@@ -1,3 +1,4 @@
 const Vendor = require('./Vendor');
+const Post = require('./Post');
 
-module.exports = { Vendor };
+module.exports = { Vendor, Post };
