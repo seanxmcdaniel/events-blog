@@ -49,6 +49,30 @@ router.post('/', (req, res) => {
         });
 });
 
+router.post('/login', (req, res) => {
+    // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+    Vendor.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(dbVendorData => {
+        if (!dbVendorData) {
+            res.status(400).json({ message: 'No vendor with that email address!' });
+            return;
+        }
+
+        // Verify vendor
+        const validPassword = dbVendorData.checkPassword(req.body.password);
+        if (!validPassword) {
+            res.status(400).json({ message: 'Incorrect password!' });
+            return;
+        }
+        res.json({ vendor: dbVendorData, message: 'You are now logged in!' });
+    });
+
+})
+
+
 // PUT /api/vendors/1
 router.put('/:id', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
