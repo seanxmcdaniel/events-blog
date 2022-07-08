@@ -4,7 +4,9 @@ const { Vendor } = require('../../models');
 // GET /api/vendors
 router.get('/', (req, res) => {
     // Access our Vendor model and run .findAll() method)
-    Vendor.findAll()
+    Vendor.findAll({
+        attributes: { exclude: ['password'] }
+    })
         .then(dbVendorData => res.json(dbVendorData))
         .catch(err => {
             console.log(err);
@@ -15,6 +17,7 @@ router.get('/', (req, res) => {
 // GET /api/vendors/1
 router.get('/:id', (req, res) => {
     Vendor.findOne({
+        attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
         }
@@ -52,6 +55,7 @@ router.put('/:id', (req, res) => {
 
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     Vendor.update(req.body, {
+        individualHooks: true,
         where: {
             id: req.params.id
         }
