@@ -2,8 +2,6 @@ const Vendor = require('./Vendor');
 const Going = require('./Going');
 const Event = require('./Event');
 
-// Associations
-
 Event.belongsTo(Vendor, {
     foreignKey: 'vendor_id',
     onDelete: 'SET NULL'
