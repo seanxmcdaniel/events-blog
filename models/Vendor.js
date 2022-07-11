@@ -23,6 +23,10 @@ Vendor.init(
             //turn on auto increment
             autoIncrement: true
         },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         // define an email column
         email: {
             type: DataTypes.STRING,
