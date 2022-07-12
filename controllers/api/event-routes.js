@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
             'vendor_name',
             //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
         ],
+        order: [['date', 'DESC']],
         include: [
             {
                 model: Vendor,
@@ -78,7 +79,10 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     Event.update(
         {
-            title: req.body.title
+            title: req.body.title,
+            description: req.body.description,
+            date: req.body.date,
+            vendor_name: req.body.vendor_name
         },
         {
             where: {
@@ -86,12 +90,31 @@ router.put('/:id', (req, res) => {
             }
         }
     )
-        .then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({ message: 'No post found with this id' });
+        .then(dbEventData => {
+            if (!dbEventData) {
+                res.status(404).json({ message: 'No event found with this id' });
                 return;
             }
-            res.json(dbPostData);
+            res.json(dbEventData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+router.delete('/:id', (req, res) => {
+    Event.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbEventData => {
+            if (!dbEventData) {
+                res.status(404).json({ message: 'No event found with this id' });
+                return;
+            }
+            res.json(dbEventData);
         })
         .catch(err => {
             console.log(err);
