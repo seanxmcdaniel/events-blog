@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Event extends Model {}
+class Event extends Model { }
 
 Event.init(
     {
@@ -26,27 +26,15 @@ Event.init(
         vendor_name: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        event_url: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isURL: true
-            }
-        },
-        vendor_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'vendor',
-                key: 'id'
-            }
         }
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'event'
+        modelName: 'event',
+        createdAt: false,
+        updatedAt: false
     }
 );
 

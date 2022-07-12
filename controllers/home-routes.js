@@ -9,13 +9,10 @@ router.get('/', (req, res) => {
             vendor_id: req.session.user_id
         },
         attributes: [
-            'id',
             'title',
             'description',
             'date',
             'vendor_name',
-            'event_url',
-            'vendor_id',
             [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
         include: [
@@ -51,8 +48,6 @@ router.get('/events/:id', (req, res) => {
             'description',
             'date',
             'vendor_name',
-            'event_url',
-            'vendor_id',
             [sequelize.literal('(SELECT COUNT (*) FROM going WHERE event.id = going.event_id)')]
         ],
         include: [
@@ -62,23 +57,23 @@ router.get('/events/:id', (req, res) => {
             }
         ]
     })
-    .then(dbEventData => {
-        if (!dbEventData) {
-            res.status(404).json({ message: 'No event found with this id.'});
-            return;
-        }
+        .then(dbEventData => {
+            if (!dbEventData) {
+                res.status(404).json({ message: 'No event found with this id.' });
+                return;
+            }
 
-        const event = dbEventData.get({ plain: true });
+            const event = dbEventData.get({ plain: true });
 
-        res.render('single-event', {
-            event,
-            loggedIn: req.session.loggedIn
-        });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    })
+            res.render('single-event', {
+                event,
+                loggedIn: req.session.loggedIn
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
 });
 
 router.get('/login', (req, res) => {
