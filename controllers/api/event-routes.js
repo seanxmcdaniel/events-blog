@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
         attributes: [
             'title',
             'description',
+            'location',
             'date',
             'vendor_name',
             //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
@@ -33,6 +34,7 @@ router.get('/:id', (req, res) => {
         attributes: [
             'title',
             'description',
+            'location',
             'date',
             'vendor_name'
             //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
@@ -57,6 +59,7 @@ router.get('/:id', (req, res) => {
         });
 })
 
+// create new event
 router.post('/', (req, res) => {
     Event.create({
         title: req.body.title,
@@ -65,6 +68,31 @@ router.post('/', (req, res) => {
         vendor_name: req.body.vendor_name
     })
         .then(dbEventData => res.json(dbEventData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+// update event by id
+router.put('/:id', (req, res) => {
+    Event.update(
+        {
+            title: req.body.title
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    )
+        .then(dbPostData => {
+            if (!dbPostData) {
+                res.status(404).json({ message: 'No post found with this id' });
+                return;
+            }
+            res.json(dbPostData);
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
