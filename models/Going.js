@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Going extends Model {}
+class Going extends Model { }
 
 Going.init(
   {
@@ -10,8 +10,17 @@ Going.init(
       primaryKey: true,
       autoIncrement: true
     },
+    vendor_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'vendor',
+        key: 'id'
+      }
+    },
     event_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'event',
         key: 'id'

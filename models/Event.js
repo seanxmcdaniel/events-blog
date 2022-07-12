@@ -23,6 +23,10 @@ Event.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         vendor_name: {
             type: DataTypes.STRING,
             allowNull: false,
