@@ -11,12 +11,17 @@ router.get('/', (req, res) => {
         attributes: [
             'id',
             'title',
+            'description',
+            'date',
+            'vendor_name',
+            'event_url',
+            'vendor_id',
             [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
         include: [
             {
                 model: Vendor,
-                attributes: ['username']
+                attributes: ['email']
             }
         ]
     })
@@ -43,12 +48,17 @@ router.get('/events/:id', (req, res) => {
         attributes: [
             'id',
             'title',
+            'description',
+            'date',
+            'vendor_name',
+            'event_url',
+            'vendor_id',
             [sequelize.literal('(SELECT COUNT (*) FROM going WHERE event.id = going.event_id)')]
         ],
         include: [
             {
                 model: Vendor,
-                attributes: ['username']
+                attributes: ['email']
             }
         ]
     })

@@ -13,11 +13,23 @@ Event.init(
         },
         title: {
             type: DataTypes.STRING,
+            allowNull: true
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        date: {
+            type: DataTypes.STRING,
             allowNull: false
+        },
+        vendor_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         event_url: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isURL: true
             }
@@ -38,4 +50,4 @@ Event.init(
     }
 );
 
-module.exports = Event
+module.exports = Event;

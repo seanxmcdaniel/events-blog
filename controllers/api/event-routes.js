@@ -7,6 +7,11 @@ router.get('/', (req, res) => {
         attributes: [
             'id',
             'title',
+            'description',
+            'date',
+            'vendor_name',
+            'event_url',
+            'vendor_id',
             [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
         ],
         include: [
@@ -31,14 +36,26 @@ router.get('/:id', (req, res) => {
         attributes: [
             'id',
             'title',
+            'description',
+            'date',
+            'vendor_name',
+            'event_url',
+            'vendor_id',
             [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
         include: [
             {
                 model: Vendor,
-                attributes: ['username']
+                attributes: ['email']
             }
         ]
     })
 })
 
+router.post('/', (req, res) => {
+    Event.create({
+        title: req.body
+    })
+})
+
+module.exports = router;
