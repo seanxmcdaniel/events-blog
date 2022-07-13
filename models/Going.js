@@ -10,6 +10,13 @@ Going.init(
       primaryKey: true,
       autoIncrement: true
     },
+    vendor_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'vendor',
+        key: 'id'
+      }
+    },
     event_id: {
       type: DataTypes.INTEGER,
       references: {

@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
             'description',
             'date',
             'vendor_name',
-            //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
+            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
         ],
         include: [
             {
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
             'description',
             'date',
             'vendor_name'
-            //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
+            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
         include: [
             {
@@ -70,5 +70,34 @@ router.post('/', (req, res) => {
             res.status(500).json(err);
         });
 });
+
+router.put('/going', (req, res) => {
+    Event.going({ ...req.body }, { Going })
+    .then(updatedGoingData => res.json(updatedGoingData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    console.log('id', req.params.id);
+    Event.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbEventData => {
+        if (!dbEventData) {
+            res.status(404).json({ message: 'No event found with this id'});
+            return;
+        }
+        res.json(dbEventData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+})
 
 module.exports = router;
