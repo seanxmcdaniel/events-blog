@@ -6,9 +6,6 @@ const { Event, Vendor, Going } = require('../models');
 //get all events for homepage
 router.get('/', (req, res) => {
     Event.findAll({
-        // where: {
-        //     vendor_id: req.session.vendor_id
-        // },
         attributes: [
             'title',
             'description',
@@ -29,7 +26,7 @@ router.get('/', (req, res) => {
 
             res.render('dashboard', {
                 events,
-                loggedIn: req.session.loggedIn
+                //loggedIn: req.session.loggedIn
             });
         })
         .catch(err => {

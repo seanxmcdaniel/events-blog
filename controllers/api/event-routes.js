@@ -64,6 +64,7 @@ router.post('/', (req, res) => {
     Event.create({
         title: req.body.title,
         description: req.body.description,
+        location: req.body.description,
         date: req.body.date,
         vendor_name: req.body.vendor_name
     })
@@ -92,6 +93,25 @@ router.put('/:id', (req, res) => {
                 return;
             }
             res.json(dbPostData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+router.delete('/:id', (req, res) => {
+    Event.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbEventData => {
+            if (!dbEventData) {
+                res.status(404).json({ message: 'No event found with this id' });
+                return;
+            }
+            res.json(dbEventData);
         })
         .catch(err => {
             console.log(err);
