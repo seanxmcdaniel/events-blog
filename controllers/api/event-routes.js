@@ -79,7 +79,11 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     Event.update(
         {
-            title: req.body.title
+            title: req.body.title,
+            description: req.body.description,
+            location: req.body.location,
+            date: req.body.date,
+            vendor_name: req.body.vendor_name
         },
         {
             where: {
