@@ -1,7 +1,11 @@
-<ol class="post-list">
-  {{#each posts as |post|}}
-  <li>
-    {{> post-info post }}
-  </li>
-  {{/each}}
-</ol>
+<section>
+  <h2>Upcoming Events</h2>
+  <ol>
+    {{#each events as |event|}}
+    <li>
+      {{> event-info event}}
+      <a href="/dashboard/edit/{{event.id}}" class="edit">Edit Event</a>
+    </li>
+    {{/each}}
+  </ol>
+</section>
