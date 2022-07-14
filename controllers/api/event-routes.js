@@ -78,6 +78,39 @@ router.post('/', (req, res) => {
         });
 });
 
+// PUT /api/events/going
+router.put('/going', (req, res) => {
+    Going.create({
+        vendor_id: req.body.vendor_id,
+        event_id: req.body.event_id
+    }).then(() => {
+        // then find the event we said we're going to
+        return Event.findOne({
+            where: {
+                id: req.body.event_id
+            },
+            attributes: [
+                'id',
+                'title',
+                'description',
+                'date',
+                'location',
+                'vendor_name'
+                [
+                sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'),
+                'going_count'
+                ]
+            ]
+        })
+    })
+        .then(dbEventData => res.json(dbEventData))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json(err);
+        })
+
+});
+
 // update event by id
 router.put('/:id', (req, res) => {
     Event.update(

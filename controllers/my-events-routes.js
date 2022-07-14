@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
             vendor_id: req.session.vendor_id
         },
         attributes: [
+            'id',
             'title',
             'description',
             'date',
