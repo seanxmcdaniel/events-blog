@@ -1,0 +1,14 @@
+{{#if events.length}}
+<section>
+  <h2>Upcoming Events</h2>
+  <ol>
+    {{#each events as |event|}}
+    <li>
+      <a href="/dashboard/edit/{{event.id}}" class="edit">Edit Event</a>
+      {{ event.title }}
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{/if}}
+
