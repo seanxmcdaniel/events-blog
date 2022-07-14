@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const controllers = require('./controllers');
 const sequelize = require('./config/connection');
@@ -18,6 +19,8 @@ const hbs = exphbs.create({ helpers });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
