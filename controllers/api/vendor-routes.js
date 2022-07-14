@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Vendor } = require('../../models');
+const { Vendor, Event, Going } = require('../../models');
 
 // GET /api/vendors
 router.get('/', (req, res) => {
@@ -20,7 +20,27 @@ router.get('/:id', (req, res) => {
         attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: Event,
+                attributes:
+                    [
+                        'id',
+                        'title',
+                        'description',
+                        'location',
+                        'date',
+                        'vendor_name'
+                    ]
+            },
+            {
+                model: Event,
+                attributes: ['title'],
+                through: Going,
+                as: 'going_posts'
+            }
+        ]
     })
         .then(dbVendorData => {
             if (!dbVendorData) {
