@@ -4,7 +4,7 @@ const sequelize = require('../config/connection');
 class Event extends Model {
     static going(body, models) {
       return models.Going.create({
-        event_id: body.post_id
+        event_id: body.event_id
       }).then(() => {
         return Event.findOne({
           where: {
@@ -14,6 +14,7 @@ class Event extends Model {
             'id',
             'title',
             'description',
+            'location',
             'date',
             'vendor_name',
             'created_at',
@@ -43,6 +44,10 @@ Event.init(
         date: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: false         
         },
         vendor_name: {
             type: DataTypes.STRING,

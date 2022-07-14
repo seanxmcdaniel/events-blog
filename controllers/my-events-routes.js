@@ -1,20 +1,19 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Event, Vendor, Going } = require('../models');
+const { Event, Vendor } = require('../models');
 
-//get events by id
-router.get('/events/:id', (req, res) => {
-    Event.findOne({
+router.get('/', (req, res) => {
+    Event.findAll({
         where: {
-            id: req.params.id
+            vendor_id: req.session.vendor_id
         },
         attributes: [
-            'id',
             'title',
             'description',
             'date',
+            'location',
             'vendor_name',
-            //[sequelize.literal('(SELECT COUNT (*) FROM going WHERE event.id = going.event_id)')]
+            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
         include: [
             {
@@ -24,42 +23,36 @@ router.get('/events/:id', (req, res) => {
         ]
     })
         .then(dbEventData => {
-            if (!dbEventData) {
-                res.status(404).json({ message: 'No event found with this id.' });
-                return;
-            }
+            const events = dbEventData.map(event => event.get({ plain: true }));
 
-            const event = dbEventData.get({ plain: true });
-
-            res.render('single-event', {
-                event,
-                loggedIn: req.session.loggedIn
+            res.render('my-events', {
+                events,
+                //loggedIn: req.session.loggedIn
             });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         })
-});
+})
 
 router.delete('/:id', (req, res) => {
-    console.log('id', req.params.id);
     Event.destroy({
         where: {
             id: req.params.id
         }
     })
-    .then(dbEventData => {
-        if (!dbEventData) {
-            res.status(404).json({ message: 'No event found with this id'});
-            return;
-        }
-        res.json(dbEventData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    })
-})
+        .then(dbEventData => {
+            if (!dbEventData) {
+                res.status(404).json({ message: 'No event found with this id' });
+                return;
+            }
+            res.json(dbEventData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 module.exports = router;

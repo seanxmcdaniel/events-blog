@@ -6,13 +6,12 @@ const { Event, Vendor, Going } = require('../models');
 //get all events for homepage
 router.get('/', (req, res) => {
     Event.findAll({
-        // where: {
-        //     vendor_id: req.session.vendor_id
-        // },
         attributes: [
+            'id',
             'title',
             'description',
             'date',
+            'location',
             'vendor_name',
             //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
@@ -28,7 +27,7 @@ router.get('/', (req, res) => {
 
             res.render('dashboard', {
                 events,
-                loggedIn: req.session.loggedIn
+                //loggedIn: req.session.loggedIn
             });
         })
         .catch(err => {
@@ -36,7 +35,6 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         })
 })
-
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {

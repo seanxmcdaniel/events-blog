@@ -5,8 +5,10 @@ const { Event, Vendor, Going } = require('../../models');
 router.get('/', (req, res) => {
     Event.findAll({
         attributes: [
+            'id',
             'title',
             'description',
+            'location',
             'date',
             'vendor_name',
             [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
@@ -31,8 +33,10 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         attributes: [
+            'id',
             'title',
             'description',
+            'location',
             'date',
             'vendor_name'
             [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
@@ -57,10 +61,12 @@ router.get('/:id', (req, res) => {
         });
 })
 
+// create new event
 router.post('/', (req, res) => {
     Event.create({
         title: req.body.title,
         description: req.body.description,
+        location: req.body.description,
         date: req.body.date,
         vendor_name: req.body.vendor_name
     })
@@ -71,33 +77,48 @@ router.post('/', (req, res) => {
         });
 });
 
-router.put('/going', (req, res) => {
-    Event.going({ ...req.body }, { Going })
-    .then(updatedGoingData => res.json(updatedGoingData))
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    })
-})
+// update event by id
+router.put('/:id', (req, res) => {
+    Event.update(
+        {
+            title: req.body.title
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    )
+        .then(dbPostData => {
+            if (!dbPostData) {
+                res.status(404).json({ message: 'No post found with this id' });
+                return;
+            }
+            res.json(dbPostData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 router.delete('/:id', (req, res) => {
-    console.log('id', req.params.id);
     Event.destroy({
         where: {
             id: req.params.id
         }
     })
-    .then(dbEventData => {
-        if (!dbEventData) {
-            res.status(404).json({ message: 'No event found with this id'});
-            return;
-        }
-        res.json(dbEventData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    })
-})
+        .then(dbEventData => {
+            if (!dbEventData) {
+                res.status(404).json({ message: 'No event found with this id' });
+                return;
+            }
+            res.json(dbEventData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 module.exports = router;

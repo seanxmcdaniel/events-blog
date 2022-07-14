@@ -1,15 +1,14 @@
-{{#if posts.length}}
+{{#if events.length}}
 <section>
   <h2>Upcoming Events</h2>
   <ol>
     {{#each events as |event|}}
     <li>
-      {{> event-info event}}
       <a href="/dashboard/edit/{{event.id}}" class="edit">Edit Event</a>
+      {{ event.title }}
     </li>
     {{/each}}
   </ol>
 </section>
 {{/if}}
 
-<script src="/javascript/add-event.js"></script>
