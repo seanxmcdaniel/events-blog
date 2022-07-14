@@ -5,6 +5,7 @@ const { Event, Vendor, Going } = require('../../models');
 router.get('/', (req, res) => {
     Event.findAll({
         attributes: [
+            'id',
             'title',
             'description',
             'location',
@@ -32,6 +33,7 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         attributes: [
+            'id',
             'title',
             'description',
             'location',
