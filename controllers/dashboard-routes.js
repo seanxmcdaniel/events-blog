@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Event, Vendor, Going } = require('../models');
+const { Event, Vendor } = require('../models');
 
 
 //get all events for homepage
 router.get('/', (req, res) => {
     Event.findAll({
         attributes: [
+            'id',
             'title',
             'description',
             'date',
