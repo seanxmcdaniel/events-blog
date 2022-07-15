@@ -1,11 +1,15 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 body,
 html {
-  background-color: rgb(155, 214, 249);;
-  height: 100%;
+  background-image: url(../images/samantha-gades-fIHozNWfcvs-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  box-sizing:border-box;
+  height: 100vh;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
@@ -16,6 +20,11 @@ ul {
   list-style: none;
 }
 
+.wrapper {
+  margin: 0;
+  padding: 0;
+}
+
 a {
   text-decoration: none;
   font-weight: bold;
@@ -23,8 +32,24 @@ a {
 }
 
 .home-header {
+  padding: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
+}
+
+.home-nav-btn{
+  display: flex;
+  justify-content: center;
+}
+
+.home-nav-btn button {
+  padding: 15px;
+  background-color: rgb(245, 245, 239);
+  border-radius: 5px;
+  margin: 0 0 20px 20px;
+  border: none;
+  opacity: 85%;
 }
 
 .event-card {
@@ -33,6 +58,7 @@ a {
   transition: 0.3s;
   margin: 14px;
   border-radius: 10px; 
+  opacity: 88%;
 }
 
 .event-content {
@@ -40,12 +66,15 @@ a {
 }
 
 footer {
-  border-top: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  padding: 1%;
-  font-size: 110%;
-}
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 13px;
+    background-color: rgb(245, 245, 239);
+    opacity: 88%;
+    text-align: center;
+  }
 
 .going-btn {
   display: inline;
