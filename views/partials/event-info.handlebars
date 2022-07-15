@@ -1,16 +1,22 @@
 <article class="event">
-  <div class="title">
+  <div class="event-title">
     <h2>{{ title }}</h2>
   </div>
-  <div class="desc">
+  <div class="event-desc">
     {{ description }}
   </div>
-  <div class="date">
-    Date:
+  <div class="event-date">
+    <span>Date:</span>
     {{ date }}
   </div>
-  <div class="location">
-    Location:
+  <div class="event-location">
+    <span>Location:</span>
     {{ location }}
   </div>
+  <div class="going-count">
+    {{ going_count }} People Going
+  <button class="going-btn">I'm Going</button>
+  </div>
 </article>
+
+<script src="../../public/js/going.js"></script>
