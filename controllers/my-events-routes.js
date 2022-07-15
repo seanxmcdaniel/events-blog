@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
             'location',
             'vendor_name',
             'going_count',
-            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
+            //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
         include: [
             {
