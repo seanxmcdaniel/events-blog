@@ -8,10 +8,10 @@ router.get('/', (req, res) => {
             'id',
             'title',
             'description',
-            'location',
             'date',
+            'location',
             'vendor_name',
-            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
+            'going_count'
         ],
         order: [['date', 'DESC']],
         include: [
@@ -37,17 +37,17 @@ router.get('/:id', (req, res) => {
             'id',
             'title',
             'description',
-            'location',
             'date',
-            //'vendor_name'
-            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
+            'location',
+            'vendor_name',
+            'going_count',
         ],
-        // include: [
-        //     {
-        //         model: Vendor,
-        //         attributes: ['email']
-        //     }
-        // ]
+        include: [
+            {
+                model: Vendor,
+                attributes: ['email']
+            }
+        ]
     })
         .then(dbEventData => {
             if (!dbEventData) {
@@ -69,23 +69,13 @@ router.post('/', (req, res) => {
         description: req.body.description,
         location: req.body.location,
         date: req.body.date,
-        vendor_name: req.body.vendor_name
+        vendor_name: req.body.vendor_name,
+        going_count: req.body.going_count
     })
         .then(dbEventData => res.json(dbEventData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
-        });
-});
-
-// PUT /api/events/going
-router.put('/going', (req, res) => {
-    // custom static method created in models/Post.js
-    Event.going(req.body, { Going })
-        .then(updatedEventData => res.json(updatedEventData))
-        .catch(err => {
-            console.log(err);
-            res.status(400).json(err);
         });
 });
 
@@ -96,7 +86,9 @@ router.put('/:id', (req, res) => {
             title: req.body.title,
             description: req.body.description,
             date: req.body.date,
-            vendor_name: req.body.vendor_name
+            vendor_name: req.body.vendor_name,
+            location: req.body.location,
+            going_count: req.body.going_count
         },
         {
             where: {
@@ -116,26 +108,6 @@ router.put('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
-
-router.delete('/:id', (req, res) => {
-    Event.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(dbEventData => {
-            if (!dbEventData) {
-                res.status(404).json({ message: 'No event found with this id' });
-                return;
-            }
-            res.json(dbEventData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
 
 router.delete('/:id', (req, res) => {
     Event.destroy({
