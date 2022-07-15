@@ -1,12 +1,11 @@
+{{#each events as |event|}}
 <div class="event-card">
   <div class="event-content">
     <ul class="event-list">
-      {{#each events as |event|}}
       <li>
         {{> event-info event }}
       </li>
-      {{/each}}
     </ul>
   </div>
 </div>
-
+{{/each}}

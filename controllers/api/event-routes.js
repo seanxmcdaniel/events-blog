@@ -39,15 +39,15 @@ router.get('/:id', (req, res) => {
             'description',
             'location',
             'date',
-            'vendor_name'
-            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
+            //'vendor_name'
+            [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
         ],
-        include: [
-            {
-                model: Vendor,
-                attributes: ['email']
-            }
-        ]
+        // include: [
+        //     {
+        //         model: Vendor,
+        //         attributes: ['email']
+        //     }
+        // ]
     })
         .then(dbEventData => {
             if (!dbEventData) {
@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
     Event.create({
         title: req.body.title,
         description: req.body.description,
-        location: req.body.description,
+        location: req.body.location,
         date: req.body.date,
         vendor_name: req.body.vendor_name
     })
