@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
             'vendor_name',
             [sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id)'), 'going_count']
         ],
+        order: [['date', 'DESC']],
         include: [
             {
                 model: Vendor,
@@ -77,11 +78,25 @@ router.post('/', (req, res) => {
         });
 });
 
+// PUT /api/events/going
+router.put('/going', (req, res) => {
+    // custom static method created in models/Post.js
+    Event.going(req.body, { Going })
+        .then(updatedEventData => res.json(updatedEventData))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+});
+
 // update event by id
 router.put('/:id', (req, res) => {
     Event.update(
         {
-            title: req.body.title
+            title: req.body.title,
+            description: req.body.description,
+            date: req.body.date,
+            vendor_name: req.body.vendor_name
         },
         {
             where: {
@@ -89,6 +104,25 @@ router.put('/:id', (req, res) => {
             }
         }
     )
+        .then(dbEventData => {
+            if (!dbEventData) {
+                res.status(404).json({ message: 'No event found with this id' });
+                return;
+            }
+            res.json(dbEventData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+router.delete('/:id', (req, res) => {
+    Event.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
         .then(dbEventData => {
             if (!dbEventData) {
                 res.status(404).json({ message: 'No event found with this id' });

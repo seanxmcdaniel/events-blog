@@ -39,22 +39,22 @@ Vendor.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                // this means the password must be at least eight characters long
-                len: [8]
+                // this means the password must be at least six characters long
+                len: [6]
             }
         }
     },
     {
         hooks: {
             // set up beforeCreate lifecycle "hook" functionality
-            async beforeCreate(newUserData) {
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
-                return newUserData;
+            async beforeCreate(newVendorData) {
+                newVendorData.password = await bcrypt.hash(newVendorData.password, 10);
+                return newVendorData;
             },
 
-            async beforeUpdate(updatedUserData) {
-                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-                return updatedUserData;
+            async beforeUpdate(updatedVendorData) {
+                updatedVendorData.password = await bcrypt.hash(updatedVendorData.password, 10);
+                return updatedVendorData;
             }
         },
         // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
