@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
             'description',
             'date',
             'location',
-            'vendor_name',
+            'vendor_id',
             'going_count'
         ],
         order: [['date', 'DESC']],
@@ -39,7 +39,7 @@ router.get('/:id', (req, res) => {
             'description',
             'date',
             'location',
-            'vendor_name',
+            'vendor_id',
             'going_count',
         ],
         include: [
@@ -69,7 +69,7 @@ router.post('/', (req, res) => {
         description: req.body.description,
         location: req.body.location,
         date: req.body.date,
-        vendor_name: req.body.vendor_name,
+        vendor_id: req.body.vendor_id,
         going_count: req.body.going_count
     })
         .then(dbEventData => res.json(dbEventData))
@@ -86,7 +86,7 @@ router.put('/:id', (req, res) => {
             title: req.body.title,
             description: req.body.description,
             date: req.body.date,
-            vendor_name: req.body.vendor_name,
+            vendor_id: req.body.vendor_id,
             location: req.body.location,
             going_count: req.body.going_count
         },

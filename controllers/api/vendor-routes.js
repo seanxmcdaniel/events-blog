@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
                         'description',
                         'location',
                         'date',
-                        'vendor_name'
+                        'vendor_id'
                     ]
             },
             {
