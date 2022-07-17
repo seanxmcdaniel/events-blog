@@ -32,7 +32,7 @@ Event.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "vendor",
+        model: "vendor", 
         key: "id"
       }
     },

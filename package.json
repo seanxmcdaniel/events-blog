@@ -10,7 +10,8 @@
     "sequelize": "^6.21.3"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node seeds.js"
   },
   "name": "events-blog",
   "description": "Repository for Project 2",
