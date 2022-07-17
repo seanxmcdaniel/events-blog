@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Vendor = require('./Vendor');
 
 class Event extends Model {}
 
@@ -27,9 +28,13 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    vendor_name: {
-      type: DataTypes.STRING,
+    vendor_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "vendor",
+        key: "id"
+      }
     },
     going_count: {
       type: DataTypes.INTEGER,
