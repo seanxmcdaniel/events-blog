@@ -7,7 +7,7 @@ async function newFormHandler(event) {
     const location = document.querySelector('input[name="event-loc"]').value;
   
     const response = await fetch(`/api/events`, {
-      method: 'POST',
+      method: 'post',
       body: JSON.stringify({
         title,
         description,
