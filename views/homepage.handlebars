@@ -1,3 +1,16 @@
+{{#if loggedIn }}
+<header>
+    <h1>
+        <a href="/" class="home-header">Happening Place</a>
+    </h1>
+</header>
+<div class="home-nav-btn">
+    <button class="logout-btn"><a href="logout">Logout</a></button>
+    <button class="dashboard-btn"><a href="dashboard">Dashboard</a></button>
+    <button class="my-events-btn"><a href="my-events">My Events</a></button>
+    <button class="new-event-btn"><a href="new-event">New Event</a></button>
+</div>
+{{/if}}
 <header>
     <h1>
         <a href="/" class="home-header">Happening Place</a>
@@ -9,16 +22,7 @@
     <button class="my-events-btn"><a href="my-events">My Events</a></button>
     <button class="new-event-btn"><a href="new-event">New Event</a></button>
 </div>
-{{#if loggedIn }}
-<header>
-    <h1>
-        <a href="/" class="home-header">Happening Place</a>
-    </h1>
-</header>
-<div class="home-nav-btn">
-    <button class="logout-btn"><a href="logoutn">Logout</a></button>
-    <button class="dashboard-btn"><a href="dashboard">Dashboard</a></button>
-    <button class="my-events-btn"><a href="my-events">My Events</a></button>
-    <button class="new-event-btn"><a href="new-event">New Event</a></button>
-</div>
-{{/if}}
+
+<script src="/js/logout.js"></script>
+
+

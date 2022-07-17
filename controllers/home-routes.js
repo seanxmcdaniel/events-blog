@@ -7,9 +7,11 @@ router.get('/', (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-    res.render('login', {
-        loggedIn: req.session.loggedIn,
-    })
+    res.render('login')
+})
+
+router.get("/logout", (req, res) => {
+    res.render('homepage')
 })
 
 router.get('/new-event', (req, res) => {
