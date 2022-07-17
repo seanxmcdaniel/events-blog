@@ -5,6 +5,7 @@ async function newFormHandler(event) {
     const description = document.querySelector('input[name="event-desc"]').value;
     const date = document.querySelector('input[name="event-date"]').value;
     const location = document.querySelector('input[name="event-loc"]').value;
+    const vendorId = document.querySelector('input[name="vendor-id"]').value;
   
     const response = await fetch(`/api/events`, {
       method: 'post',
@@ -12,7 +13,8 @@ async function newFormHandler(event) {
         title,
         description,
         date,
-        location
+        location,
+        vendor_id: vendorId
       }),
       headers: {
         'Content-Type': 'application/json'

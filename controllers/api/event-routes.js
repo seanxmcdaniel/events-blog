@@ -69,6 +69,8 @@ router.post('/', (req, res) => {
         description: req.body.description,
         location: req.body.location,
         date: req.body.date,
+        vendor_id: req.body.vendor_id,
+        going_count: 0
     })
         .then(dbEventData => res.json(dbEventData))
         .catch(err => {

@@ -62,7 +62,14 @@ router.post('/', (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-        .then(dbVendorData => res.json(dbVendorData))
+        .then(dbVendorData => {
+            req.session.save(() => {
+                req.session.vendor_id = dbVendorData.id;
+                req.session.email = dbVendorData.email;
+                req.session.loggedIn = true;
+
+                res.json(dbVendorData);
+            })})
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -88,7 +95,16 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
-        res.json({ vendor: dbVendorData, message: 'You are now logged in!' });
+        req.session.save(() => {
+            req.session.vendor_id = dbVendorData.id;
+            req.session.email = dbVendorData.email;
+            req.session.loggedIn = true;
+
+        res.json({ vendor: dbVendorData, message: 'You are now logged in!' })});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
     });
 
 })

@@ -6,7 +6,7 @@ const Event = require('./Event');
 
 Event.belongsTo(Vendor, {
     foreignKey: 'vendor_id',
-    onDelete: 'SET NULL'
+    onDelete: 'CASCADE'
 });
 
 // Event.hasMany(Going, {

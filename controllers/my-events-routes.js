@@ -4,9 +4,9 @@ const { Event, Vendor } = require('../models');
 
 router.get('/', (req, res) => {
     Event.findAll({
-        // where: {
-        //     vendor_id: req.session.vendor_id
-        // },
+         where: {
+            vendor_id: req.session.vendor_id
+        },
         attributes: [
             'id',
             'title',
@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
             'location',
             'vendor_id',
             'going_count',
-            //[sequelize.literal('(SELECT COUNT(*) FROM going WHERE event.id = going.event_id'), 'going_count']
         ],
         include: [
             {
@@ -29,7 +28,8 @@ router.get('/', (req, res) => {
 
             res.render('my-events', {
                 events,
-                //loggedIn: req.session.loggedIn
+                loggedIn: req.session.loggedIn,
+                vendor_id: req.session.vendor_id
             });
         })
         .catch(err => {

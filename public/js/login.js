@@ -24,11 +24,7 @@ async function loginFormHandler(event) {
   
   async function signupFormHandler(event) {
     event.preventDefault();
-<<<<<<< HEAD
-
-=======
   
->>>>>>> views
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
   

@@ -26,8 +26,7 @@ router.get('/', (req, res) => {
             const events = dbEventData.map(event => event.get({ plain: true }));
 
             res.render('dashboard', {
-                events,
-                //loggedIn: req.session.loggedIn
+                events
             });
         })
         .catch(err => {
