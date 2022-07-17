@@ -28,6 +28,8 @@ a {
   color: #333;
 }
 
+/* Home */
+
 .home-header {
   font-size: 100px;
   font-weight: bold;
@@ -43,7 +45,7 @@ a {
 .home-nav-btn{
   display: flex;
   justify-content: center;
-  margin: 20px
+  margin: 5px
 }
 
 .home-nav-btn button {
@@ -61,6 +63,8 @@ a {
   opacity: 98%;
   transition: 20ms;
 }
+
+/* Dashboard */
 
 .dashboard-header {
   font-size: 80px;
@@ -104,3 +108,87 @@ footer {
 .going-btn {
   display: inline;
 }
+
+
+/* Login */
+
+.form-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  background-color: rgb(245, 245, 239);
+  border-radius: 10px; 
+  opacity: 95%;
+  width: 600px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  opacity: 100%;
+}
+
+.login,
+.signup {
+  padding-bottom: 22px;
+}
+
+.login-form,
+.signup-form {
+  padding: 20px;
+}
+
+.login-form input,
+.signup-form input,
+.event-info input {
+  padding: 14px;
+  margin: 7px 0;
+  border-radius: 5px;
+  border: 1px solid rgb(150, 150, 150);
+  background-color: rgb(245, 245, 239);
+}
+
+.login-form button,
+.signup-form button,
+.new-event-form button {
+  padding: 8px;
+  margin-top: 8px;
+}
+
+/* New Event */
+
+.new-event-form {
+  border-radius: 10px; 
+  opacity: 95%;
+  background-color: rgb(245, 245, 239);
+  height: 600px;
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-info h2 {
+  font-size: 50px;
+  padding-bottom: 30px;
+}
+
+#event-title {
+  padding: 14px 189px;
+}
+
+#event-desc {
+  padding: 14px 165px;
+}
+
+.new-event-form button {
+  padding: 12px;
+  margin-top: 12px;
+}
+

@@ -1,24 +1,24 @@
-async function goingClickHandler(event) {
-    event.preventDefault();
+// async function goingClickHandler(event) {
+//     event.preventDefault();
   
-    const going = window.location.toString().split('/')[
-      window.location.toString().split('/').length - 1
-    ];
-    const response = await fetch('/api/events/going', {
-      method: 'PUT',
-      body: JSON.stringify({
-        going_count: going
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+//     const going = window.location.toString().split('/')[
+//       window.location.toString().split('/').length - 1
+//     ];
+//     const response = await fetch('/api/events/going', {
+//       method: 'PUT',
+//       body: JSON.stringify({
+//         going_count: going
+//       }),
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     });
   
-    if (response.ok) {
-      document.location.reload();
-    } else {
-      alert(response.statusText);
-    }
-  }
+//     if (response.ok) {
+//       document.location.reload();
+//     } else {
+//       alert(response.statusText);
+//     }
+//   }
   
-  document.querySelector('.going-btn').addEventListener('click', goingClickHandler);
+//   document.querySelector('.going-btn').addEventListener('click', goingClickHandler);

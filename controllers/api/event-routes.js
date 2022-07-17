@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
             'vendor_id',
             'going_count'
         ],
-        order: [['date', 'DESC']],
+        order: [['date', 'ASC']],
         include: [
             {
                 model: Vendor,

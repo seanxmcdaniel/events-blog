@@ -1,26 +1,27 @@
 <section>
-  <h2>Create a New Event</h2>
-
-  <form class="new-event-form">
-    <div>
-      <label for="event-title">Event Title Here</label>
-      <input type="text" id="event-title" name="event-title" />
-    </div>
-    <div>
-      <label for="event-desc">Event Description Here</label>
-      <input type="text" id="event-desc" name="event-desc" />
-    </div>
-    <div>
-      <label for="event-date">Date of Event Here</label>
-      <input id="event-date" name="event-date" />
-    </div>
-    <div>
-      <label for="event-loc">Location of Event Here</label>
-      <input type="text" id="event-loc" name="event-loc" />
-    </div>
-    <input type="hidden" id="vendor-id" name="vendor-id" value="{{vendor_id}}"/>
-    <button type="submit" class="btn">Create</button>
-  </form>
+  <div class="form-container">
+    <form class="new-event-form">
+      <div class="event-info">
+        <h2>Create a New Event</h2>
+        <div>
+          <label for="event-title">Event Title: </label>
+          <input type="text" id="event-title" name="event-title" />
+        </div>
+        <div>
+          <label for="event-desc">Event Description: </label>
+          <input type="text" id="event-desc" name="event-desc" />
+        </div>
+        <div>
+          <label for="event-date">Date of Event: </label>
+          <input id="event-date" name="event-date" />
+          <label for="event-loc">Location of Event: </label>
+          <input type="text" id="event-loc" name="event-loc" />
+        </div>
+        <input type="hidden" id="vendor-id" name="vendor-id" value="{{vendor_id}}" />
+        <button type="submit" class="new-event-btn">Create</button>
+      </div>
+    </form>
+  </div>
 </section>
 
 <script src="/js/add-event.js"></script>
