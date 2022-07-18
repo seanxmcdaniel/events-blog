@@ -15,7 +15,7 @@ async function loginFormHandler(event) {
       });
   
       if (response.ok) {
-        document.location.replace('/my-events/');
+        document.location.replace('/');
       } else {
         alert(response.statusText);
       }

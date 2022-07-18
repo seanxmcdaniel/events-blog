@@ -10,7 +10,7 @@
     <button class="my-events-btn"><a href="my-events">My Events</a></button>
     <button class="new-event-btn"><a href="new-event">New Event</a></button>
 </div>
-{{/if}}
+{{^}}
 <header>
     <h1>
         <a href="/" class="home-header">Happening Place</a>
@@ -19,10 +19,9 @@
 <div class="home-nav-btn">
     <button class="login-btn"><a href="login">Login</a></button>
     <button class="dashboard-btn"><a href="dashboard">Dashboard</a></button>
-    <button class="my-events-btn"><a href="my-events">My Events</a></button>
-    <button class="new-event-btn"><a href="new-event">New Event</a></button>
 </div>
 
 <script src="/js/logout.js"></script>
+{{/if}}
 
 

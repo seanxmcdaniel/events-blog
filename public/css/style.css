@@ -28,6 +28,11 @@ a {
   color: #333;
 }
 
+.back-home {
+  display: flex;
+  background-color: antiquewhite;
+}
+
 /* Home */
 
 .home-header {
