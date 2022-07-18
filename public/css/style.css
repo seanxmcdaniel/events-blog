@@ -197,19 +197,3 @@ input {
   padding: 12px;
   margin-top: 12px;
 }
-
-@media screen and (max-width: 1005px) {
-
-.home-header {
-  font-size: 60px;
-}
-
-}
-
-@media screen and (max-width: 575px) {
-
-  .home-header {
-    font-size: 30px;
-  }
-
-}
