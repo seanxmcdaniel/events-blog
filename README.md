@@ -41,6 +41,6 @@
 If you have any questions about Happening Place, please feel free to reach out to any of the developers here on GitHub or through email.
   
   
-  Github username: seanxmcdaniel
+  Github username: seanxmcdaniel , smb685 
   
-  Github Email: seanxmcdaniel@gmail.com
+  Github Email: seanxmcdaniel@gmail.com , sylvester.brandon25@gmail.com
