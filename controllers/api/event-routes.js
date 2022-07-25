@@ -79,6 +79,17 @@ router.post('/', (req, res) => {
         });
 });
 
+// PUT /api/posts/upvote
+router.put('/going', (req, res) => {
+    // custom static method created in models/Post.js
+    Event.going({ ...req.body, vendor_id: req.session.vendor_id }, { Vendor, Going })
+        .then(updatedGoingData => res.json(updatedGoingData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
 // update event by id
 router.put('/:id', (req, res) => {
     Event.update(
